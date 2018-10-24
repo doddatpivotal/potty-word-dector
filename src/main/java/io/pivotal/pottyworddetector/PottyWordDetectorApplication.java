@@ -51,20 +51,24 @@ public class PottyWordDetectorApplication implements Function<HashMap<String, Ob
 				pottyWordFound.set(true);
 			}
 		});
+
+		JsonElement je = gson.fromJson(json, JsonElement.class);
+		JsonObject jo = je.getAsJsonObject();
+
 		if(pottyWordFound.get()) {
 			log.info("Potty word(s) found");
-
-			JsonElement je = gson.fromJson(json, JsonElement.class);
-			JsonObject jo = je.getAsJsonObject();
 			jo.addProperty("hasPottyWord", true);
-			Type stringStringMap = new TypeToken<HashMap<String, Object>>(){}.getType();
-			HashMap<String,Object> map = gson.fromJson(json, stringStringMap);
-			return map;
 		} else {
 			log.info("All clean, no potty word(s) found");
+			jo.addProperty("hasPottyWord", false);
 		}
 
-		return jsonMessage;
+		String updatedJson = gson.toJson(jo);
+
+		Type stringStringMap = new TypeToken<HashMap<String, Object>>(){}.getType();
+		HashMap<String,Object> map = gson.fromJson(updatedJson, stringStringMap);
+
+		return map;
 
 	}
 
