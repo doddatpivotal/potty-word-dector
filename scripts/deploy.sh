@@ -2,7 +2,7 @@
 
 riff service delete potty-word-dectector
 
-set localpath = ${1:-.}
+localpath=${1:-.}
 
 riff function create java potty-word-detector \
     --local-path $localpath \
