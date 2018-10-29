@@ -8,8 +8,7 @@ This sample requires riff v0.1.3 or later.
 riff function create java potty-word-detector \
   --local-path . \
   --image $DOCKER_ID/potty-word-detector \
-  --verbose \
-  --wait
+  --verbose
 ```
 
 #### create from git repo, pushing image to DockerHub

@@ -2,8 +2,10 @@
 
 riff service delete potty-word-dectector
 
+set localpath = ${1:-.}
+
 riff function create java potty-word-detector \
-    --git-repo https://github.com/doddatpivotal/potty-word-detector.git \
+    --local-path $localpath \
     --image $DOCKER_ID/potty-word-detector \
     --verbose
 
